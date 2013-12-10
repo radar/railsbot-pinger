@@ -8,18 +8,22 @@ class Bot < Summer::Connection
     ping_command
   end
 
+  def nick
+    'helpa'
+  end
+
   def ping_command
-    privmsg("!ping", "logga")
+    privmsg("!ping", nick)
     @ping_thread = Thread.new do
-      puts "Checking helpa's pulse..."
+      puts "Checking #{nick}'s pulse..."
       sleep(30)
       if @helpa_dead
         puts "Committing Seppuku!!"
         Process.kill("HUP", File.read("/tmp/summer-#{config[:nick]}").to_i)
       else
-        puts "helpa is DEAD! LONG LIVE helpa!"
+        puts "#{nick} is DEAD! LONG LIVE #{nick}!"
         @helpa_dead = true
-        Process.kill("HUP", File.read("/tmp/summer-logga.pid").to_i)
+        Process.kill("HUP", File.read("/tmp/summer-#{nick}.pid").to_i)
         puts "WAITING FOR PING..."
         STDOUT.flush
         wait_and_ping
