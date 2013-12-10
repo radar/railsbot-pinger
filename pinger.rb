@@ -40,7 +40,7 @@ class Bot < Summer::Connection
   end
 
   def wait_and_ping
-    sleep(300)
+    sleep(60)
     ping_command
   end
 end
