@@ -19,7 +19,7 @@ class Bot < Summer::Connection
       sleep(30)
       if @helpa_dead
         puts "Committing Seppuku!!"
-        Process.kill("HUP", File.read("/tmp/summer-#{config[:nick]}").to_i)
+        Process.kill("HUP", File.read("/tmp/summer-#{config[:nick]}.pid").to_i)
       else
         puts "#{nick} is DEAD! LONG LIVE #{nick}!"
         @helpa_dead = true
