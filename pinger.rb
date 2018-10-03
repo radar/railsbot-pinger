@@ -13,6 +13,7 @@ class Bot < Summer::Connection
   end
 
   def ping_command
+    sleep(10) # wait for nickserv auth
     privmsg("!ping", nick)
     @ping_thread = Thread.new do
       puts "Waiting to hear back from #{nick}..."
