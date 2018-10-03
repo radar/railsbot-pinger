@@ -15,7 +15,7 @@ class Bot < Summer::Connection
   def ping_command
     privmsg("!ping", nick)
     @ping_thread = Thread.new do
-      puts "Checking #{nick}'s pulse..."
+      puts "Waiting to hear back from #{nick}..."
       sleep(30)
       if @helpa_dead
         puts "Committing Seppuku!!"
@@ -40,7 +40,9 @@ class Bot < Summer::Connection
   end
 
   def wait_and_ping
-    sleep(60)
+    timeout = 60 # adjustable because debugging
+    puts "Waiting #{timeout} seconds before attempting new ping."
+    sleep(timeout)
     ping_command
   end
 end
